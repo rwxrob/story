@@ -14,7 +14,7 @@ part.Hello = _ => {
 }
 
 part.Field = _ => {
-    print("You find youself in a field.")
+    print("You find yourself in a field.")
     return 'Hello'
 }
 
