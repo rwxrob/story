@@ -1,5 +1,6 @@
 
 let part = {}
+let action = {}
 
 let state = {
   "line":"",
@@ -25,6 +26,7 @@ const moveToEndOf = _ => {
     sel.removeAllRanges()
     sel.addRange(range)
     repl.scrollTop = repl.scrollHeight
+    window.scrollTo(0,document.body.scrollHeight)
 }
 
 function print(html){
@@ -35,11 +37,20 @@ function print(html){
 repl.onkeypress = function(e) {
   if (e.key !== "Enter" ) return
   e.preventDefault()
+
   let raw = repl.lastChild.data.substring(2)
   state.raw = raw.trim()
   state.line = raw.toLowerCase()
+
   repl.innerHTML += '<br>'
-      
+  
+  for (const [name,method] of Object.entries(action)) {
+    if (method(state)) {
+      prompt()
+      return
+    }
+  }
+
   let previous = state.current
   p = part[state.current]
   if (!p) {
