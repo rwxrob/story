@@ -1,6 +1,6 @@
 
 let part = {}
-let action = {}
+let response = {}
 
 let state = {
   "line":"",
@@ -10,6 +10,7 @@ let state = {
 }
 
 const repl = document.querySelector("#repl")
+const body = document.querySelector("body")
 repl.innerText = repl.innerText.trim()
 
 const prompt = function() {
@@ -34,18 +35,30 @@ function print(html){
   moveToEndOf(repl)
 }
 
-repl.onkeypress = function(e) {
-  if (e.key !== "Enter" ) return
-  e.preventDefault()
+repl.onkeydown = _ => {
 
-  let raw = repl.lastChild.data.substring(2)
+  let data = repl.lastChild.data
+  let key = _.key
+
+  if (key === "Backspace" && data === ">") {
+    _.preventDefault()
+    return
+  }
+
+  if (key !== "Enter" ) return
+
+  _.preventDefault()
+
+  let raw = data.substring(2)
   state.raw = raw.trim()
   state.line = raw.toLowerCase()
 
   repl.innerHTML += '<br>'
   
-  for (const [name,method] of Object.entries(action)) {
-    if (method(state)) {
+  for (const [name,method] of Object.entries(response)) {
+    let response = method(state)
+    if (response) {
+      print(response)
       prompt()
       return
     }
@@ -63,9 +76,7 @@ repl.onkeypress = function(e) {
   prompt()
 }
 
-repl.onclick = function(e) {
-  moveToEndOf(repl)
-}
+repl.onclick = body.onlick = _ => moveToEndOf(repl)
 
 window.onload = e => {
     repl.focus()
