@@ -2,16 +2,19 @@ let part = {}
 let response = {}
 let curinput = null
 
+
 let state = {
   "line":"",
   "raw":"",
-  "current": "Welcome",
+  "current": "Welcome", // the default
+  "previous": "Welcome", // the default
   "prompt": "&gt;&nbsp"
 }
 
 const repl = document.querySelector("#repl")
+const body = document.querySelector("body")
 
-const input = _ => {
+const promptForInput = _ => {
   repl.innerHTML =  repl.innerHTML + "<span class=prompt>" + state.prompt + "</span>"
     + "<span class=input contenteditable></span>"
   focusLastInput()
@@ -44,8 +47,10 @@ const print = _ => {
 
 repl.onkeydown = _ => {
 
-  let data = curinput.textContent
+  let data = (curinput) ? curinput.textContent: ""
   let key = _.key
+
+  // only a single line of input allowed
 
   if (key !== "Enter" ) return
 
@@ -54,33 +59,47 @@ repl.onkeydown = _ => {
   state.raw = data.trim()
   state.line = data.toLowerCase()
 
-  repl.innerHTML += '<br>'
+  // catch any responses that have priority over
+  // the current part handler, use this for actions
+  // such as flipping a coin or showing inventory
   
   for (const [name,method] of Object.entries(response)) {
     let response = method(state)
     if (response) {
       print(response)
-      input()
+      promptForInput()
       return
     }
   }
 
+  // now hand off the input to the current part
+  
   let previous = state.current
   p = part[state.current]
   if (!p) {
-    print(`That part (${p}) does not seem to be available.`)
+    print(`Part Unavailable<br>
+          <i class=small>Contact the author to let them know. It could
+          be that this is the default part and it is
+          not defined in the parts.js file.</i>`)
+    return
   } else {
     c = p(state)
-    if (c) state.current = c
+    if (c) {
+      state.current = c
+      state.previous = previous
+    }
   }
 
-  input()
+  promptForInput()
 }
 
-repl.onclick = _ => focusLastInput()
+window.onclick = _ => focusLastInput()
+
+const triggerEnter = _ => {
+  let e = new KeyboardEvent('keypress',{'key':'Enter'})
+  repl.onkeydown(e)
+}
 
 window.onload = _ => {
-    repl.focus()
-    state.current = part[state.current](state)
-    input()
+  triggerEnter()
 }
