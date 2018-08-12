@@ -1,0 +1,55 @@
+
+body {
+  margin:0;
+  background: #002b36;
+  padding: 0;
+}
+
+#repl {
+  margin:0;
+  line-height: 1.2em;
+  /*width: 80ch;*/
+  width: 100%;
+  /*height: 28.2em;*/
+  height: 100%;
+  /*color: #eee8d5;*/
+  color: cyan;
+  /*background: #002b36;*/
+  font-family: menlo, Consolas, monospace;
+  font-size: x-large;
+  overflow-y: auto;
+  text-align: left;
+  padding-top: .5em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+span.prompt, p {
+  margin: 0;
+  margin-bottom: .8em;
+  margin-top: .8em;
+}
+
+.p {
+  color: gold;
+}
+
+.prompt {
+  color: white;
+  font-weight: bold;
+}
+
+.input:focus {
+  outline: none;
+  color: cyan;
+}
+
+@media screen and (max-width: 30rem) {
+
+#repl {
+  margin: 0;
+  padding-top: 0;
+  padding-left: .8em;
+  padding-right: .5em;
+}
+

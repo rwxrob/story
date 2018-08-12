@@ -12,7 +12,7 @@ professionals.
 
 This boilerplate comes with four starters:
 
-1. [Web REPL]
+1. [Progressive Web App]
 2. [Web Console]
 3. [Terminal Node JS]
 4. [Terminal Python]
@@ -37,7 +37,7 @@ essential understanding of just what first-class functions are and why
 they are important.
 
 [REPL.it]: https://repl.it/@robmuh/storygame
-[Web REPL]: html
+[Progressive Web App]: html
 [Web Console]: console
 [Terminal Node JS]: node
 [Terminal Python]: python

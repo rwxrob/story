@@ -1,27 +1,34 @@
-
 let part = {}
 let response = {}
+let curinput = null
 
 let state = {
   "line":"",
   "raw":"",
   "current": "Welcome",
-  "prompt": ">&nbsp;"
+  "prompt": "&gt;&nbsp"
 }
 
 const repl = document.querySelector("#repl")
-const body = document.querySelector("body")
-repl.innerText = repl.innerText.trim()
 
-const prompt = function() {
-  repl.innerHTML =  repl.innerHTML + state.prompt
-  moveToEndOf(repl)
+const input = _ => {
+  repl.innerHTML =  repl.innerHTML + "<span class=prompt>" + state.prompt + "</span>"
+    + "<span class=input contenteditable></span>"
+  focusLastInput()
 }
 
-const moveToEndOf = _ => {
-    _.focus()
+const lastInput = _ => { 
+  let inputs = document.getElementsByClassName('input')
+  return inputs[inputs.length-1]
+}
+
+const focusLastInput = _ => {
+    let last = lastInput()
+    if (!last) return
+    curinput = last
+    last.focus()
     let range = document.createRange()
-    range.selectNodeContents(_)
+    range.selectNodeContents(last)
     range.collapse(false)
     let sel = window.getSelection()
     sel.removeAllRanges()
@@ -30,28 +37,22 @@ const moveToEndOf = _ => {
     window.scrollTo(0,document.body.scrollHeight)
 }
 
-function print(html){
-  repl.innerHTML = repl.innerHTML + "<p class=p>" + html + "</p>"
-  moveToEndOf(repl)
+const print = _ => {
+  repl.innerHTML = repl.innerHTML + "<p class=p>" + _ + "</p>"
+  focusLastInput()
 }
 
 repl.onkeydown = _ => {
 
-  let data = repl.lastChild.data
+  let data = curinput.textContent
   let key = _.key
-
-  if (key === "Backspace" && data === ">") {
-    _.preventDefault()
-    return
-  }
 
   if (key !== "Enter" ) return
 
   _.preventDefault()
 
-  let raw = data.substring(2)
-  state.raw = raw.trim()
-  state.line = raw.toLowerCase()
+  state.raw = data.trim()
+  state.line = data.toLowerCase()
 
   repl.innerHTML += '<br>'
   
@@ -59,7 +60,7 @@ repl.onkeydown = _ => {
     let response = method(state)
     if (response) {
       print(response)
-      prompt()
+      input()
       return
     }
   }
@@ -73,13 +74,13 @@ repl.onkeydown = _ => {
     if (c) state.current = c
   }
 
-  prompt()
+  input()
 }
 
-repl.onclick = body.onlick = _ => moveToEndOf(repl)
+repl.onclick = _ => focusLastInput()
 
-window.onload = e => {
+window.onload = _ => {
     repl.focus()
     state.current = part[state.current](state)
-    prompt()
+    input()
 }

@@ -24,14 +24,18 @@
 
   </head>
 
-  <body>
+  <body id=repl>
 
-    <div id=repl contenteditable></div>
+    <!-- don't try to put anything else in here -->
 
     <!-- no modules for now, just simple scripts -->
-    <script src=web-repl.js></script>
+    <!-- that must be in this order to work -->
+
+    <script src=app.js></script>
     <script src=parts.js></script>
     <script src=responses.js></script>
 
   </body>
+
+
 </html>

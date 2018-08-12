@@ -1,7 +1,6 @@
 
 part.Welcome = _ => { 
-    print('Welcome to this story game!')
-    print('(Enter to continue)')
+    print('Welcome to this story game! (Enter to continue.)')
     return 'Hello'
 }
 
