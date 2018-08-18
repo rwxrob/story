@@ -2,7 +2,6 @@ let part = {}
 let response = {}
 let curinput = null
 
-
 let state = {
   "line":"",
   "raw":"",
@@ -50,6 +49,8 @@ repl.onkeydown = _ => {
   let data = (curinput) ? curinput.textContent: ""
   let key = _.key
 
+  console.log(key)
+
   // only a single line of input allowed
 
   if (key !== "Enter" ) return
@@ -57,7 +58,7 @@ repl.onkeydown = _ => {
   _.preventDefault()
 
   state.raw = data.trim()
-  state.line = data.toLowerCase()
+  state.line = state.raw.toLowerCase()
 
   // catch any responses that have priority over
   // the current part handler, use this for actions
@@ -93,13 +94,8 @@ repl.onkeydown = _ => {
   promptForInput()
 }
 
+const triggerEnter = _ => 
+  repl.onkeydown(new KeyboardEvent('keypress',{'key':'Enter'}))
+
 window.onclick = _ => focusLastInput()
-
-const triggerEnter = _ => {
-  let e = new KeyboardEvent('keypress',{'key':'Enter'})
-  repl.onkeydown(e)
-}
-
-window.onload = _ => {
-  triggerEnter()
-}
+window.onload = _ => triggerEnter()
