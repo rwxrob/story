@@ -4,7 +4,7 @@
 
 part.Welcome = _ => { 
     print(`Hey there, I'm <b>Skeeziks</b>.`)
-    print(`I know that's a wierd name. Mr. Rob gave it to me. Says it
+    print(`I know that's a weird name. Mr. Rob gave it to me. Says it
           fits my personality or something. At least he didn't name me "Bob"
           or draw me like a talking paper-clip. Anyway&hellip;`)
     print(`What's <i>your</i> name? 😀`)
