@@ -13,6 +13,7 @@ part.Welcome = _ => {
 
 part.Name = _ => {
   _.name = _.raw
+  if (_.name === '' ) return 'Welcome'
   print(`Ok, ${_.name}. Sounds good to me. (Who am I to judge?)`)
   print(`Nice to meet you, ${_.name}! 👋 `)
   print(`I've heard if you keep saying

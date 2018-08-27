@@ -1,6 +1,5 @@
 if ( 'serviceWorker' in navigator ) navigator.serviceWorker.register('/sw.js')
 
-
 let part = {}
 let response = {}
 let curinput = null
@@ -11,6 +10,11 @@ let state = {
   "current": "Welcome", // the default
   "previous": "Welcome", // the default
   "prompt": "&gt;&nbsp"
+}
+
+const loadLocalStorage = () => {
+  let s = localStorage.getItem('state')
+  if (s) state = JSON.parse(s)  // rediculously slow, but small data set
 }
 
 const repl = document.querySelector("#repl")
@@ -42,6 +46,10 @@ const focusLastInput = _ => {
     window.scrollTo(0,document.body.scrollHeight)
 }
 
+const save = () => {
+  localStorage.setItem('state',JSON.stringify(state))
+}
+
 const print = _ => {
   repl.innerHTML = repl.innerHTML + "<p class=p>" + _ + "</p>"
   focusLastInput()
@@ -63,6 +71,7 @@ repl.onkeydown = _ => {
   state.raw = data.trim()
   state.line = state.raw.toLowerCase()
 
+
   // catch any responses that have priority over
   // the current part handler, use this for actions
   // such as flipping a coin or showing inventory
@@ -71,6 +80,7 @@ repl.onkeydown = _ => {
     let response = method(state)
     if (response) {
       print(response)
+      save()
       promptForInput()
       return
     }
@@ -92,6 +102,7 @@ repl.onkeydown = _ => {
       state.current = c
       state.previous = previous
     }
+    save()
   }
 
   promptForInput()
@@ -101,4 +112,8 @@ const triggerEnter = _ =>
   repl.onkeydown(new KeyboardEvent('keypress',{'key':'Enter'}))
 
 window.onclick = _ => focusLastInput()
-window.onload = _ => triggerEnter()
+
+window.onload = _ => {
+  loadLocalStorage()
+  triggerEnter()
+}

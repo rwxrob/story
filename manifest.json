@@ -1,0 +1,21 @@
+{
+  "short_name": "Skeeziks Story",
+  "name": "SkilStak Skeeziks Story",
+  "description": "A sample story game with quirky, pontificating narrator.",
+  "start_url": "/index.html",
+  "icons":[
+    {
+      "src": "/assets/skeeziks192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/skeeziks512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "theme_color": "#002b36",
+  "background_color": "#002b36",
+  "display": "fullscreen"
+}
