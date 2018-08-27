@@ -1,3 +1,6 @@
+if ( 'serviceWorker' in navigator ) navigator.serviceWorker.register('/sw.js')
+
+
 let part = {}
 let response = {}
 let curinput = null
@@ -49,7 +52,7 @@ repl.onkeydown = _ => {
   let data = (curinput) ? curinput.textContent: ""
   let key = _.key
 
-  console.log(key)
+  //console.log(key)
 
   // only a single line of input allowed
 
