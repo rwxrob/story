@@ -1,26 +1,19 @@
-const CACHE = 'skeeziks-cache-v1'
-const ASSETS = 'skeeziks-assets'
-
+const CACHEPRE = 'skeeziks-cache'
+const CACHE = CACHEPRE + '-v2'
 const URLS = [
   '/index.html',
   '/app.js',
   '/parts.js',
   '/responses.js',
   '/style.css',
+  '/assets/tails.png',
+  '/assets/heads.png',
 ]
 
-const loadAssets = _ => {
-  fetch('/assets/manifest.json')
-    .then( _ => _.json() )
-    .then( assets => {
-      caches.open(ASSETS)
-        .then( _ => _.addAll(assets) ) 
-    })
-}
-
 self.addEventListener('install', _ => {
-  _.waitUntil( caches.open(CACHE).then( c => c.addAll(URLS) ))
-  _.waitUntil( loadAssets() )
+  _.waitUntil(
+    caches.open(CACHE)
+      .then( c => c.addAll(URLS) ))
 })
 
 const cacheFirst = (cache,path) => {
@@ -76,7 +69,8 @@ self.addEventListener('fetch', _ => {
   else if (
     path.startsWith('/assets')
   ){
-    _.respondWith(cacheFirst(ASSETS,path))
+    console.log('from cache')
+    _.respondWith(cacheFirst(CACHE,path))
   }
 
 })
@@ -86,7 +80,7 @@ self.addEventListener('activate', _ => {
     caches.keys().then( names => {
       return Promise.all(
         names.map( name => {
-          if (CACHE !== 'name' && name.startsWith(ASSETS)) {
+          if (CACHE !== name && name.startsWith(CACHEPRE)) {
             return caches.delete(name)
           }
         })

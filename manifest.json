@@ -1,6 +1,6 @@
 {
   "short_name": "Skeeziks Story",
-  "name": "SkilStak Skeeziks Story",
+  "name": "Skeeziks Story",
   "description": "A sample story game with quirky, pontificating narrator.",
   "start_url": "/index.html",
   "icons":[
@@ -17,5 +17,5 @@
   ],
   "theme_color": "#002b36",
   "background_color": "#002b36",
-  "display": "fullscreen"
+  "display": "standalone"
 }

@@ -1,4 +1,4 @@
-if ( 'serviceWorker' in navigator ) navigator.serviceWorker.register('sw.js')
+if ( 'serviceWorker' in navigator ) navigator.serviceWorker.register('/sw.js')
 
 let part = {}
 let response = {}
@@ -18,7 +18,8 @@ const reset = () => state = defaultState()
 
 const loadLocalStorage = () => {
   let s = localStorage.getItem('state')
-  state = s ? JSON.parse(s) : state
+  if (s) state = JSON.parse(s)
+  else reset()
 }
 
 const repl = document.querySelector("#repl")
