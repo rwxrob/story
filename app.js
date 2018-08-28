@@ -4,17 +4,21 @@ let part = {}
 let response = {}
 let curinput = null
 
-let state = {
+const defaultState = () => JSON.parse(JSON.stringify({
   "line":"",
   "raw":"",
   "current": "Welcome", // the default
   "previous": "Welcome", // the default
   "prompt": "&gt;&nbsp"
-}
+}))
+
+let state
+
+const reset = () => state = defaultState()
 
 const loadLocalStorage = () => {
   let s = localStorage.getItem('state')
-  if (s) state = JSON.parse(s)  // rediculously slow, but small data set
+  state = s ? JSON.parse(s) : state
 }
 
 const repl = document.querySelector("#repl")

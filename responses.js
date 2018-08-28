@@ -30,7 +30,7 @@ response.End = _ => _.previous === 'TheEnd' ? `Zzzzzz.` : ''
 
 response.Restart = _ => {
   if (_.line === 'restart') {
-    _.current = 'Welcome'
+    reset()
     return 'Restarting.'
   }
 }
