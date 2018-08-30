@@ -10,13 +10,20 @@ let voiceNamesString
 const voiceSupport = window.speechSynthesis
 
 // unfortunately onvoiceschanged event not generated for Safari 
-let loadVoices = setInterval(_ => {
-  if (!voiceSupport) clearInterval(loadVoices)
+const loadVoices = _ => {
+  if (!voiceSupport) return
   voices = speechSynthesis.getVoices()
+  if (!voices.length) return
   voiceNames = voices.map( _ => _.name )
   voiceNamesString = voiceNames.join(', ')
-  if (voices.length) clearInterval(loadVoices)
-}, 100)
+}
+
+loadVoices()
+
+let loadv = setInterval( _ => {
+  loadVoices()
+  if (voices.length) clearInterval(loadv)
+} , 100)
 
 const defaultState = () => JSON.parse(JSON.stringify({
   line: "",
@@ -34,10 +41,23 @@ const defaultState = () => JSON.parse(JSON.stringify({
   }
 }))
 
-let state
+let state = {
+  line: "",
+  page: 0,
+  raw: "",
+  current: "Welcome", 
+  previous: "Welcome",
+  voice: {
+    on: false,
+    name: "",
+    pitch: 1,        // 0 to 2
+    rate: 1,         // 0.1 to 10
+    volume: 1.0,       // 0 to 1
+    lang: 'en-US',
+  }
+}
 
 const reset = () => state = defaultState()
-
 
 const loadLocalStorage = () => {
   let s = localStorage.getItem('state')

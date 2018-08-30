@@ -6,7 +6,6 @@ const URLS = [
   '/parts.js',
   '/responses.js',
   '/style.css',
-  '/voice.js',
   '/assets/tails.png',
   '/assets/heads.png',
 ]

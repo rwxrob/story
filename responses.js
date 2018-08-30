@@ -7,7 +7,7 @@ response.Name = _ => {
 }
 
 response.Wow = _ => {
-  if (_.line.match(/wow|cool|sick|awesome|radical|rad|phat/)) {
+  if (_.line.match(/^(wow|cool|sick|awesome|radical|rad|phat)$/)) {
     return `I <i>know</i> right?!`
   }
 }

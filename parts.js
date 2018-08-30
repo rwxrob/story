@@ -24,7 +24,7 @@ part.Name = _ => {
 }
 
 part.Intro = _ => {
-  print(`This is a <i>story game</i>. (You can <code>skip</code> the explanation if you want.)`)
+  print(`This is a framework for an interactive <i>story game</i>.`)
   return 'StoryGame'
 }
 
@@ -53,19 +53,13 @@ const storygame = [
   `<i>Natural language</i> is the idea of simply speaking
     or chatting or texting things naturally, as you would
     with another human.`,
-  `As with see with Alexa, Google Assistant, and Siri this
+  `As we see with Alexa, <a href='https://youtu.be/bd1mEm2Fy08'>Google Assistant</a>, and Siri this
    form of interaction with technology will only get better.`,
-  `Well, that's all for now. Come back later and I tell you
-   how to make your own if Mr. Rob doesn't explain it first.`,
+  `Well, that's all for now. Come back later and I'll tell
+   you how to start your own game.`,
 ]
 
-part.StoryGame = _ => {
-  if (_.line === 'skip') {
-    print(`Ok, skipping to how to make your own.`)
-    return 'HowTo'
-  }
-  return print(storygame) ? 'StoryGame' : 'TheEnd'
-}
+part.StoryGame = _ => print(storygame) ? 'StoryGame' : 'TheEnd'
 
 /*
 
@@ -214,9 +208,3 @@ part.TheEnd = _ => {
   print(`It's been nice meeting you. 😉`)
   return 'TheEnd'
 }
-
-
-
-
-
-
