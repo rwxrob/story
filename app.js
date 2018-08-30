@@ -204,6 +204,13 @@ response.Voices = _ => {
   }
 }
 
+response.Back = _ => {
+  if (! _.line.match(/^(go\s+)?back$/)) return ''
+  if (_.page > 1) { _.page -= 2; return '' }
+  if (_.page <= 1) _.page = 0 
+  return `Can't go back further. Sorry.`
+}
+
 // ---------------------------------------------------------
 
 repl.onkeydown = _ => {
@@ -234,7 +241,6 @@ repl.onkeydown = _ => {
     let response = method(state)
     if (response) {
       print(response)
-      state.current = state.previous
       save()
       promptForInput()
       return
@@ -255,6 +261,7 @@ repl.onkeydown = _ => {
     let c = p(state)
     if (c) {
       state.current = c
+      if (state.page === 0) 
       state.previous = previous
     }
     save()

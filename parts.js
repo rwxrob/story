@@ -45,9 +45,9 @@ const storygame = [
   `Speaking of A-I, these days all you humans are talking to your devices,
     probably because speech is your best <a 
     href="https://youtu.be/ZrGPuUQsDjo?t=3m1s" target=_blank>output interface</a>.`,
-  `A story game can use voice both for output and input. If you're on your phone
-    you can try this now. Tap the microphone
-    instead of the letters on the keyboard.`,
+  `A story game can use voice both for output and input. Tell me to say something.`,
+  `If you're on your phone you can <i>vocally</i> tell me using the microphone
+    instead of the keyboard.`,
 ]
 
 part.StoryGame = _ => {
