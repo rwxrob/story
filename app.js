@@ -15,7 +15,7 @@ const defaultState = () => JSON.parse(JSON.stringify({
   previous: "Welcome",
   voice: {
     on: false,
-    name: "Google US English",
+    name: "",
     pitch: 1,        // 0 to 2
     rate: 1,         // 0.1 to 10
     volume: 1.0,       // 0 to 1
@@ -128,9 +128,13 @@ response.AreYouSure = _ => {
 response.Talking = _ => {
   let prev = state.voice.name
   let m = _.line.match(/talk(?:ing)?\s+like\s+(an?\s+)?(\S.+)/)
+  let voice
   if (m !== null) {
-    let voice = m[2]
+    voice = m[2]
     state.voice.on = true
+    if (navigator.appVersion.match(/pixel|android/i)) {
+      return `I can only start talking with this voice. I hope that's ok. Tell me to be quiet to stop.`
+    }
     switch (voice) {
       case 'girl':
       case 'chick':
@@ -169,9 +173,9 @@ response.Talking = _ => {
         state.voice.name = v ? v.name : state.voice.name
     }
     if (state.voice.name === prev) {
-      return `Can't find a voice for ${voice}. Sorry.`
+      return `Can't find a new voice for ${voice}. Sorry.`
     } else {
-      return `Ok, I'll start talking like ${m[1]===undefined?'':m[1]}${state.voice.name}. Tell me to be quiet to stop.`
+      return `Ok, I'll start talking like ${m[1]===undefined?'':m[1]}${voice}. Tell me to be quiet to stop.`
     }
   }
 }
