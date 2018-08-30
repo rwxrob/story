@@ -48,8 +48,15 @@ const storygame = [
   `A story game can use voice both for output and input. Tell me to say something.`,
   `If you're on your phone you can <i>vocally</i> tell me using the microphone
     instead of the keyboard.`,
-  `Hey, Rob, don't go past this until you have it written.`,
-  `Too far.`
+  `Creating a story game or text bot involves processing
+    natural language and coding for it.`,
+  `<i>Natural language</i> is the idea of simply speaking
+    or chatting or texting things naturally, as you would
+    with another human.`,
+  `As with see with Alexa, Google Assistant, and Siri this
+   form of interaction with technology will only get better.`,
+  `Well, that's all for now. Come back later and I tell you
+   how to make your own if Mr. Rob doesn't explain it first.`,
 ]
 
 part.StoryGame = _ => {
@@ -57,37 +64,13 @@ part.StoryGame = _ => {
     print(`Ok, skipping to how to make your own.`)
     return 'HowTo'
   }
-  return print(storygame) ? 'StoryGame' : 'HowTo'
+  return print(storygame) ? 'StoryGame' : 'TheEnd'
 }
 
-part.NaturalLanguage = _ => {
-  print(`Creating a story game or text bot involves processing
-    natural language and coding for it.`)
-  print(`<i>Natural language</i> is the idea of simply speaking
-    or chatting or texting things naturally, as you would
-    with another human.`)
-  print(`I may have no problem with complicated command line
-    interfaces, but most humans do. It follows then that
-    learning to think of interacting with technology--and
-    coding for it--should involve learning to use natural
-    language.`)
-    return 'CreativeWriting'
-}
-
-part.CreativeWriting = _ => {
-  print(`A story game requires some level of <i>creative
-    writing</i>. This means you get at least two skills
-    for the price of one. While you are coding you are
-    also thinking up creative angles on what your story
-    or game will be about.`)
-  print(`<i>Here's a tip. Ask your English teacher if you
-    can somehow get partial credit for your work
-    coding your own <b>interactive fiction</b> while you
-    work on your game.</i>`)
-    return 'HowTo'
-}
+/*
 
 part.HowTo = _ => {
+  return print(howto) ? 'StoryGame' : 'HowTo'
   print(`So here's the quickest way to get started:`)
   print(`
     <ol>
@@ -225,14 +208,9 @@ part.AddingState = _ => {
   print(`Look through this source code to see several examples.`)
   return 'TheEnd'
 }
+*/
 
 part.TheEnd = _ => {
-  print(`Believe it or not that is all there is to it. The rest
-    is limited only by your coding knowledge and imagination.
-    As we learn coding concepts from the first day you will
-    be able to add to your story game. Then as your skill
-    increases so can your game along with it.`)
-
   print(`It's been nice meeting you. 😉`)
   return 'TheEnd'
 }
