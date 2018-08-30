@@ -7,7 +7,7 @@ let voices
 let voiceNames
 let voiceNamesString
 
-const voiceSupport = speechSynthesis in window
+const voiceSupport = window.speechSynthesis
 
 // unfortunately onvoiceschanged event not generated for Safari 
 let loadVoices = setInterval(_ => {
