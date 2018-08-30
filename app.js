@@ -7,6 +7,17 @@ let voices
 let voiceNames
 let voiceNamesString
 
+const voiceSupport = speechSynthesis in window
+
+// unfortunately onvoiceschanged event not generated for Safari 
+let loadVoices = setInterval(_ => {
+  if (!voiceSupport) clearInterval(loadVoices)
+  voices = speechSynthesis.getVoices()
+  voiceNames = voices.map( _ => _.name )
+  voiceNamesString = voiceNames.join(', ')
+  if (voices.length) clearInterval(loadVoices)
+}, 100)
+
 const defaultState = () => JSON.parse(JSON.stringify({
   line: "",
   page: 0,
@@ -26,6 +37,7 @@ const defaultState = () => JSON.parse(JSON.stringify({
 let state
 
 const reset = () => state = defaultState()
+
 
 const loadLocalStorage = () => {
   let s = localStorage.getItem('state')
@@ -130,7 +142,12 @@ response.Talking = _ => {
   let m = _.line.match(/talk(?:ing)?\s+like\s+(an?\s+)?(\S.+)/)
   let voice
   if (m !== null) {
+    if (! voiceSupport ) return `Doesn't look like I have a voice on this device. Sorry`
     voice = m[2]
+    if (state.voice.name === '') {
+      let daniel = voices.filter( _ => _.name === 'Daniel')[0]
+      if (daniel) state.voice.name = 'Daniel'
+    }
     state.voice.on = true
     if (navigator.appVersion.match(/pixel|android/i)) {
       return `I can only start talking with this voice. I hope that's ok. Tell me to be quiet to stop.`
@@ -255,11 +272,3 @@ window.onload = _ => {
   loadLocalStorage()
   triggerEnter()
 }
-
-window.speechSynthesis.onvoiceschanged = _ => {
-  voices = speechSynthesis.getVoices()
-  voiceNames = voices.map( _ => _.name )
-  voiceNamesString = voiceNames.join(', ')
-}
-
-window.speechSynthesis.getVoices()
