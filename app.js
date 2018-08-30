@@ -1,13 +1,11 @@
 if ( 'serviceWorker' in navigator ) navigator.serviceWorker.register('/sw.js')
 
-
 let part = {}
 let response = {}
 let curinput = null
 let voices
 let voiceNames
 let voiceNamesString
-
 
 const defaultState = () => JSON.parse(JSON.stringify({
   line: "",
@@ -17,7 +15,7 @@ const defaultState = () => JSON.parse(JSON.stringify({
   previous: "Welcome",
   voice: {
     on: false,
-    name: "Daniel",
+    name: "Google US English",
     pitch: 1,        // 0 to 2
     rate: 1,         // 0.1 to 10
     volume: 1.0,       // 0 to 1
@@ -69,6 +67,7 @@ const save = () => {
 }
 
 const say = _ => {
+  speechSynthesis.cancel()
   let m = new SpeechSynthesisUtterance()
   m.voice = voices.filter(_ => _.name === state.voice.name)[0]
   m.volume = state.voice.volume || 1
@@ -100,18 +99,18 @@ const print = _ => {
 
 // ---------------------------------------------------------
 
-
 response.Restart = _ => {
   if (_.line === 'restart') {
+    speechSynthesis.cancel()
     reset()
     return 'Restarting.'
   }
 }
 
 response.ReadAloud = _ => {
-  if ( _.line.match(/read\s+aloud/) ) {
+  if ( _.line.match(/(read\s+)?(a|out\s+)loud|say\s+something|talk to me/) ) {
     _.voice.on = true
-    return "Ok, I'll start reading aloud from now on. Tell me to be quiet to stop."
+    return "Ok, I'll start talking now. Tell me to be quiet to stop."
   }
   if ( _.line.match(/be\s*quiet|shut\s*up/) ) {
     say('')
