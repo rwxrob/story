@@ -81,6 +81,7 @@ const save = () => {
 const say = _ => {
   speechSynthesis.cancel()
   let m = new SpeechSynthesisUtterance()
+  if (! state.voice.name) state.voice.name = 'Daniel'
   m.voice = voices.filter(_ => _.name === state.voice.name)[0]
   m.volume = state.voice.volume || 1
   m.pitch = state.voice.pitch || 1
@@ -144,10 +145,6 @@ response.Talking = _ => {
   if (m !== null) {
     if (! voiceSupport ) return `Doesn't look like I have a voice on this device. Sorry`
     voice = m[2]
-    if (state.voice.name === '') {
-      let daniel = voices.filter( _ => _.name === 'Daniel')[0]
-      if (daniel) state.voice.name = 'Daniel'
-    }
     state.voice.on = true
     if (navigator.appVersion.match(/pixel|android/i)) {
       return `I can only start talking with this voice. I hope that's ok. Tell me to be quiet to stop.`
@@ -241,6 +238,7 @@ repl.onkeydown = _ => {
     let response = method(state)
     if (response) {
       print(response)
+      if (_.page > 0) _.page-- // ugly hack until pages fixed
       save()
       promptForInput()
       return

@@ -48,6 +48,8 @@ const storygame = [
   `A story game can use voice both for output and input. Tell me to say something.`,
   `If you're on your phone you can <i>vocally</i> tell me using the microphone
     instead of the keyboard.`,
+  `Hey, Rob, don't go past this until you have it written.`,
+  `Too far.`
 ]
 
 part.StoryGame = _ => {
