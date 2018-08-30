@@ -8,25 +8,27 @@ body {
   margin: 0;
 }
 
-
 #repl {
   padding: 1em;
   padding-top: 0;
-  line-height: 1.2em;
-  /*width: 80ch;*/
-  width: 100%;
-  /*height: 28.2em;*/
-  height: 100%;
+  line-height: 1.3em;
+  max-height: 12em;
+  min-height: 12em;
+  max-width: 16em;
+  min-width: 16em;
   color: #eee8d5;
   background: #002b36;
   font-family: menlo, Consolas, monospace;
   font-size: x-large;
-  overflow-y: auto;
+  overflow-y: hidden;
   text-align: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
 
 span.prompt, p {
-  max-width: 90%;
   margin-bottom:1em;
 }
 
@@ -75,24 +77,5 @@ pre,code {
   font-size: 1.4em;
 }
 
-@media screen and (min-width: 30rem) {
-
-  #repl {
-  }
-
-}
-
-@media screen and (min-width: 60rem) {
-
-  body {
-    background: black;
-  }
-
-  #repl {
-    width: 60rem;
-    left: 50%;
-    transform: translate(-50%, 0);
-    position: fixed;
-  }
-
+#repl {
 }

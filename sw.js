@@ -6,6 +6,7 @@ const URLS = [
   '/parts.js',
   '/responses.js',
   '/style.css',
+  '/voice.js',
   '/assets/tails.png',
   '/assets/heads.png',
 ]
@@ -69,7 +70,6 @@ self.addEventListener('fetch', _ => {
   else if (
     path.startsWith('/assets')
   ){
-    console.log('from cache')
     _.respondWith(cacheFirst(CACHE,path))
   }
 

@@ -1,17 +1,13 @@
 
-const HEADS = `
-You flip <b><i>HEADS</i></b>.
-<p><img src=assets/heads.png height=200px></p>`
-
-const TAILS = `
-You flip <b><i>TAILS</i></b>.
-<p><img src=assets/tails.png height=200px></p>`
 
 response.FlipCoin = _ => {
-  if (_.line == 'flip coin' || _.line == 'flip') {
+  if (_.line.match(/(flip(\s+a)?\s+)?coin/)) {
     let i = Math.floor(Math.random()*2)
-    if (i === 0) return HEADS
-    return TAILS
+    if (i === 0) {
+      return `You flip <b><i>HEADS</i></b>. <p><img src=assets/heads.png height=220px></p>`
+    } else {
+      return `You flip <b><i>TAILS</i></b>.<p><img src=assets/tails.png height=220px></p>`
+    }
   }
 }
 
@@ -24,19 +20,10 @@ response.Name = _ => {
   }
 }
 
-response.Wow = _ => _.line.startsWith('wow') ? `I <i>know</i> right?!` : ''
+response.Wow = _ => {
+  if (_.line.match(/wow|cool|sick|awesome|radical|rad|phat/)) {
+    return `I <i>know</i> right?!`
+  }
+}
 
 response.End = _ => _.previous === 'TheEnd' ? `Zzzzzz.` : ''
-
-response.Restart = _ => {
-  if (_.line === 'restart') {
-    reset()
-    return 'Restarting.'
-  }
-}
-
-response.ShowData = _ => {
-  if (_.line === 'show data') {
-    return '<pre>'+JSON.stringify(_,null,2)+'</pre>'
-  }
-}
