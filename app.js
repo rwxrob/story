@@ -32,11 +32,11 @@ const defaultState = () => JSON.parse(JSON.stringify({
   current: "Welcome", 
   previous: "Welcome",
   voice: {
-    on: false,
+    on: state.voice.on, // hack to maintain state
     name: "",
     pitch: 1,        // 0 to 2
     rate: 1,         // 0.1 to 10
-    volume: 1.0,       // 0 to 1
+    volume: 1.0,     // 0 to 1
     lang: 'en-US',
   }
 }))
@@ -140,12 +140,12 @@ response.Restart = _ => {
   }
 }
 
-response.ReadAloud = _ => {
-  if ( _.line.match(/(read\s+)?(a|out\s+)loud|say\s+something|talk to me/) ) {
+response.TalkToMe = _ => {
+  if ( _.line.match(/start\s+talking|talk\s+to\s+me|tell\s+me\s+(about\s+it|more)|^talk$/) ) {
     _.voice.on = true
     return "Ok, I'll start talking now. Tell me to be quiet to stop."
   }
-  if ( _.line.match(/be\s*quiet|shut\s*up/) ) {
+  if ( _.line.match(/you('?re?|\s+are)\s+too?\s+loud|stop\s+talking|be\s*quiet|shut\s*up/) ) {
     say('')
     _.voice.on = false
     return "Ok, I'll be quiet."
@@ -265,16 +265,20 @@ repl.onkeydown = _ => {
     }
   }
 
-  // now hand off the input to the current part
-  
   let previous = state.current
   p = part[state.current]
-  if (!p) {
+
+  // make sure we have some parts to work with
+  if (!part.Welcome) {
+    print(`Missing Welcome Part<br><i class=small>You are missing the first Welcome part, which
+    all text bots require.`)
+    reset()
+  } else if (!p) {
     print(`Part Unavailable<br>
           <i class=small>Contact the author to let them know. It could
           be that this is the default part and it is
           not defined in the parts file.</i>`)
-    return
+    state.current = state.previous
   } else {
     let c = p(state)
     if (c) {
@@ -282,10 +286,11 @@ repl.onkeydown = _ => {
       if (state.page === 0) 
       state.previous = previous
     }
-    save()
   }
 
+  save()
   promptForInput()
+  return
 }
 
 const triggerEnter = _ => 

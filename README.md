@@ -21,5 +21,12 @@ do not convey this essential understanding because the syntax lacks the
 ability to define a new function simply by assigning an anonymous
 function as a value.
 
+TODO
+----
+
+* Add `say` just to say whatever is typed
+* Add up arrow and down arrow history
+* Handle missing part more gracefully.
+
 [REPL.it]: https://repl.it/@robmuh/storygame
 [best first language]: https://medium.com/@robmuh/reconsider-learning-python-first-292ee5555c78
