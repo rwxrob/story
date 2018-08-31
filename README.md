@@ -27,6 +27,7 @@ TODO
 * Add up arrow and down arrow history
 * Add information flow history for `back`
 * Add _.voice.name support to change voices programmatically
+* Add lock that forces to wait for voice to finish before continuing
 
 [REPL.it]: https://repl.it/@robmuh/storygame
 [best first language]: https://medium.com/@robmuh/reconsider-learning-python-first-292ee5555c78

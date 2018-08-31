@@ -111,10 +111,11 @@ const say = _ => {
   speechSynthesis.speak(m)
 }
 
+const T = _ => _.replace(/\{\{(\S+)\}\}/, (m,k) => state[k])
+
 const print = _ => {
   if ( _ instanceof Array && state.page < _.length ) {
-    let buf = _[state.page].replace(/\{\{(\S+)\}\}/, (m,k) => state[k])
-    repl.innerHTML = `<p class=p>${buf}</p>`
+    repl.innerHTML = `<p class=p>${T(_[state.page])}</p>`
     if (state.voice.on) say(repl.innerText)
     state.page++
     if (state.page == _.length) {
@@ -124,7 +125,7 @@ const print = _ => {
       return true
     }
   } else {
-    repl.innerHTML = "<p class=p>" + _ + "</p>"
+    repl.innerHTML = "<p class=p>" + T(_) + "</p>"
     if (state.voice.on) say(repl.innerText)
   }
   focusLastInput()
@@ -215,7 +216,7 @@ response._Talking = _ => {
         state.voice.name = v ? v.name : state.voice.name
     }
     if (state.voice.name === prev) {
-      return `Can't find a new voice for ${voice}. Sorry.`
+      return `Can't find a new voice for ${voice}. Sorry. Try 'voices' to see others.`
     } else {
       return `Ok, I'll start talking like ${m[1]===undefined?'':m[1]}${voice}. Tell me to be quiet to stop.`
     }

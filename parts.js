@@ -220,6 +220,6 @@ part.AddingState = _ => {
 */
 
 part.TheEnd = _ => {
-  print(`It's been nice meeting you. 😉`)
+  print(`It's been nice meeting you, {{name}}. Hope to see you soon. 😉`)
   return 'TheEnd'
 }
