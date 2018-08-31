@@ -3,7 +3,7 @@
 // always have at least this one part for it to work.
 
 part.Welcome = _ => {
-  print(`Hi I'm <b>Skeeziks</b> Mr. Rob's assistant, a
+  print(`Hi I'm <b>Skeeziks</b> Mr. Rob's virtual assistant, a
    weird name, I know. Mr. Rob thinks it matches my personality.
   By the way, I talk in different voices if you tell me to.`)
   return 'Name'
