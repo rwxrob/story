@@ -3,8 +3,8 @@
 // always have at least this one part for it to work.
 
 part.Welcome = _ => {
-  print(`Hey there, I'm <b>Skeeziks</b>, Mr. Rob's assistant. I know it's a weird name.
-    Mr. Rob said he thought it matched my personality.`)
+  print(`Hi I'm <b>Skeeziks</b> Mr. Rob's assistant, a
+   weird name, I know. Mr. Rob thinks it matches my personality.`)
   return 'Name'
 }
 
@@ -18,20 +18,28 @@ part.Name = _ => {
     print(`Pleased to meet you, ${_.name}.`)
     return 'Intro'
   } else {
-    print(`What is <i>your</i> name? 😀`)
+    print(`What's <i>your</i> name? 😀`)
     return 'Name'
   }
 }
 
 const intro = [
-  `Allow me to introduce myself, {{name}}. I'm an A-I assistant. Some call us
+  `Allow me to introduce myself. I'm an A-I assistant. Some call us
     text bots, chat bots, or just bots.`,
-  `Calling me a bot is a little like me calling you a dude or a chick.`,
+  `Calling me a bot is a little like calling you a dude or a chick but
+    I certainly don't mind.`,
+  `By they way I can talk if you tell me to. I have different voices.`,
+  `Programming an assistant is relatively easy to do, a great way
+    to learn to code.`,
+  `You can program an assistant to do whatever you want really, respond to
+    random trivia, narrate a story game, or grab your favorite stuff
+    from the Internetz.`
 ]
 
-part.Intro = _ => print(intro) ? 'StoryGame' : 'TheEnd'
+part.Intro = _ => print(intro) ? 'Intro' : 'StoryGame'
 
 const storygame = [
+  `Let me tell you about story games in particular.`,
   `A story game called <a target="_blank" rel="noopener"
     href="http://www.historyofinformation.com/expanded.php?id=2384">Adventure</a>
     was the first computer game ever created.`,

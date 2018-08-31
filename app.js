@@ -142,10 +142,10 @@ response._Restart = _ => {
 }
 
 response._Say = _ => {
-  let m = _.raw.match(/^say\s+(.*)/i)
+  let m = _.raw.match(/^say,?\s+(?:'|")?([^'"]*)/i)
   if (!m) return
   _.voice.on = true
-  return m[1]
+  return `"${m[1]}"`
 }
 
 response._TalkToMe = _ => {
@@ -223,7 +223,7 @@ response._Talking = _ => {
 }
 
 response._Voices = _ => {
-  if (_.line.match(/((^(show).+)|^)voices$/)) {
+  if (_.line.match(/((^(show|tell|what|which).+)|^)voices/)) {
     alert(voiceNamesString)
     return ''
   }
