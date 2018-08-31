@@ -113,7 +113,8 @@ const say = _ => {
 
 const print = _ => {
   if ( _ instanceof Array && state.page < _.length ) {
-    repl.innerHTML = "<p class=p>" + _[state.page] + "</p>"
+    let buf = _[state.page].replace(/\{\{(\S+)\}\}/, (m,k) => state[k])
+    repl.innerHTML = `<p class=p>${buf}</p>`
     if (state.voice.on) say(repl.innerText)
     state.page++
     if (state.page == _.length) {
@@ -132,7 +133,7 @@ const print = _ => {
 
 // ---------------------------------------------------------
 
-response.Restart = _ => {
+response._Restart = _ => {
   if (_.line === 'restart') {
     speechSynthesis.cancel()
     reset()
@@ -140,7 +141,14 @@ response.Restart = _ => {
   }
 }
 
-response.TalkToMe = _ => {
+response._Say = _ => {
+  let m = _.raw.match(/^say\s+(.*)/i)
+  if (!m) return
+  _.voice.on = true
+  return m[1]
+}
+
+response._TalkToMe = _ => {
   if ( _.line.match(/start\s+talking|talk\s+to\s+me|tell\s+me\s+(about\s+it|more)|^talk$/) ) {
     _.voice.on = true
     return "Ok, I'll start talking now. Tell me to be quiet to stop."
@@ -152,13 +160,13 @@ response.TalkToMe = _ => {
   }
 }
 
-response.AreYouSure = _ => {
+response._AreYouSure = _ => {
   if (_.line.match(/are\s+you\s+sure/)) {
     return "Of course I'm sure."
   }
 }
 
-response.Talking = _ => {
+response._Talking = _ => {
   let prev = state.voice.name
   let m = _.line.match(/talk(?:ing)?\s+like\s+(an?\s+)?(\S.+)/)
   let voice
@@ -214,14 +222,14 @@ response.Talking = _ => {
   }
 }
 
-response.Voices = _ => {
+response._Voices = _ => {
   if (_.line.match(/((^(show).+)|^)voices$/)) {
     alert(voiceNamesString)
     return ''
   }
 }
 
-response.Back = _ => {
+response._Back = _ => {
   if (! _.line.match(/^(go\s+)?back$/)) return ''
   if (_.page > 1) { _.page -= 2; return '' }
   if (_.page <= 1) _.page = 0 

@@ -3,8 +3,8 @@
 // always have at least this one part for it to work.
 
 part.Welcome = _ => {
-  print(`Hello, I'm <b>Skeeziks</b>. I know it's a weird name. Mr. Rob gave it to me. He said he thought
-         it matched my personality.`)
+  print(`Hey there, I'm <b>Skeeziks</b>, Mr. Rob's assistant. I know it's a weird name.
+    Mr. Rob said he thought it matched my personality.`)
   return 'Name'
 }
 
@@ -23,15 +23,20 @@ part.Name = _ => {
   }
 }
 
-part.Intro = _ => {
-  print(`This is a framework for an interactive <i>story game</i>.`)
-  return 'StoryGame'
-}
+const intro = [
+  `Allow me to introduce myself, {{name}}. I'm an A-I assistant. Some call us
+    text bots, chat bots, or just bots.`,
+  `Calling me a bot is a little like me calling you a dude or a chick.`,
+]
+
+part.Intro = _ => print(intro) ? 'StoryGame' : 'TheEnd'
 
 const storygame = [
-  `A story game called <a target="_blank" rel="noopener" href="http://www.historyofinformation.com/expanded.php?id=2384">Adventure</a>
+  `A story game called <a target="_blank" rel="noopener"
+    href="http://www.historyofinformation.com/expanded.php?id=2384">Adventure</a>
     was the first computer game ever created.`,
-  `That's right, it wasn't <a href="https://en.wikipedia.org/wiki/Pong" target=_blank>pong</a>, despite what most people think. `,
+  `That's right, it wasn't <a href="https://en.wikipedia.org/wiki/Pong"
+    target=_blank>pong</a>, despite what most people think. `,
   `This genre of game became known as <i>text adventures</i>.
     It was made popular by games such as
     <a href="https://en.wikipedia.org/wiki/Zork" target=_blank>Zork</a>,
@@ -53,10 +58,10 @@ const storygame = [
   `<i>Natural language</i> is the idea of simply speaking
     or chatting or texting things naturally, as you would
     with another human.`,
-  `As we see with Alexa, <a href='https://youtu.be/bd1mEm2Fy08'>Google Assistant</a>, and Siri this
-   form of interaction with technology will only get better.`,
-  `Well, that's all for now. Come back later and I'll tell
-   you how to start your own game.`,
+  `As we see with Alexa, <a href='https://youtu.be/bd1mEm2Fy08'>Google
+    Assistant</a>, and Siri this form of interaction with technology
+    will only get better.`,
+  `Well, that's all for now.`,
 ]
 
 part.StoryGame = _ => print(storygame) ? 'StoryGame' : 'TheEnd'

@@ -26,7 +26,7 @@ TODO
 
 * Add `say` just to say whatever is typed
 * Add up arrow and down arrow history
-* Handle missing part more gracefully.
+* Add _.voice.name support to change voices programmatically
 
 [REPL.it]: https://repl.it/@robmuh/storygame
 [best first language]: https://medium.com/@robmuh/reconsider-learning-python-first-292ee5555c78
