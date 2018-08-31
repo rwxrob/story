@@ -25,8 +25,8 @@ part.Name = _ => {
 }
 
 const intro = [
-  `Allow me to introduce myself. I'm an A-I assistant. Some call us
-    text bots, chat bots, or just bots.`,
+  `Allow me to introduce myself. I'm a virtual assistant. Some call us
+    A-I, text bots, chat bots, or just bots.`,
   `Calling me a bot is a little like calling you a dude or a chick but
     I certainly don't mind.`,
   `Programming an assistant is relatively easy to do, a great way
@@ -69,7 +69,7 @@ const storygame = [
   `As we see with Alexa, <a href='https://youtu.be/bd1mEm2Fy08'>Google
     Assistant</a>, and Siri, this form of interaction with technology
     will only get better.`,
-  `Well, that's all for now.`,
+  `Well, that's all for now. Type 'restart' to start over if you like.`,
 ]
 
 part.StoryGame = _ => print(storygame) ? 'StoryGame' : 'TheEnd'
