@@ -38,7 +38,10 @@ const defaultState = () => JSON.parse(JSON.stringify({
     rate: 1,         // 0.1 to 10
     volume: 1.0,     // 0 to 1
     lang: 'en-US',
-  }
+  },
+  history: [" "],
+  historyIndex: 0,
+  historyHTML: null
 }))
 
 let state = {
@@ -55,11 +58,10 @@ let state = {
     volume: 1.0,       // 0 to 1
     lang: 'en-US',
   },
+  history: [" "],
+  historyIndex: 0,
+  historyHTML: null
 }
-
-state.history = [""]
-state.historyIndex = 0
-state.historyHTML = "Test"
 
 const reset = () => state = defaultState()
 
@@ -251,14 +253,14 @@ repl.onkeydown = _ => {
   if (key === 'ArrowUp') {
     if (state.historyIndex > 0) {
       state.historyIndex -= 1
-      repl.innerHTML = `${state.historyHTML}<span class=input contenteditable>${state.history[state.historyIndex]}</span>`
+      repl.innerHTML = `${state.historyHTML}<span class=prompt>> </span><span class=input contenteditable>${state.history[state.historyIndex]}</span>`
       focusLastInput()
     }
     _.preventDefault()
   } else if (key === 'ArrowDown') {
     if (state.historyIndex < state.history.length-1) {
       state.historyIndex += 1
-      repl.innerHTML = `${state.historyHTML}<span class=input contenteditable>${state.history[state.historyIndex]}</span>`
+      repl.innerHTML = `${state.historyHTML}<span class=prompt>> </span><span class=input contenteditable>${state.history[state.historyIndex]}</span>`
       focusLastInput()
     }
     _.preventDefault()
@@ -281,7 +283,7 @@ repl.onkeydown = _ => {
 
   state.history.pop()
   state.history.push(state.raw)
-  state.history.push("")
+  state.history.push(" ")
 
   // TODO: add sudo support
 
@@ -295,8 +297,8 @@ repl.onkeydown = _ => {
       print(response)
       if (_.page > 0) _.page-- // ugly hack until pages fixed
       save()
-      promptForInput()
       state.historyHTML = repl.innerHTML
+      promptForInput()
       return
     }
   }
@@ -317,6 +319,7 @@ repl.onkeydown = _ => {
     state.current = state.previous
   } else {
     let c = p(state)
+    state.historyHTML = repl.innerHTML
     if (c) {
       state.current = c
       if (state.page === 0) 
