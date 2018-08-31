@@ -4,7 +4,8 @@
 
 part.Welcome = _ => {
   print(`Hi I'm <b>Skeeziks</b> Mr. Rob's assistant, a
-   weird name, I know. Mr. Rob thinks it matches my personality.`)
+   weird name, I know. Mr. Rob thinks it matches my personality.
+  By the way, I talk in different voices if you tell me to.`)
   return 'Name'
 }
 
@@ -28,7 +29,6 @@ const intro = [
     text bots, chat bots, or just bots.`,
   `Calling me a bot is a little like calling you a dude or a chick but
     I certainly don't mind.`,
-  `By they way I can talk if you tell me to. I have different voices.`,
   `Programming an assistant is relatively easy to do, a great way
     to learn to code.`,
   `You can program an assistant to do whatever you want really, respond to

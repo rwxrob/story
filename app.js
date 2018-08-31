@@ -225,13 +225,15 @@ response._Talking = _ => {
 response._Voices = _ => {
   if (_.line.match(/((^(show|tell|what|which).+)|^)voices/)) {
     alert(voiceNamesString)
-    return ''
+    return `To use one of those voices say "Tell me to talk like [voice]".
+    You don't need the whole name, just a keyword from it. Say "back" to
+    if you need to repeat what was said.`
   }
 }
 
 response._Back = _ => {
-  if (! _.line.match(/^(go\s+)?back$/)) return ''
-  if (_.page > 1) { _.page -= 2; return '' }
+  if (! _.line.match(/^(go\s+)?back$/)) return
+  if (_.page > 1) { _.page -= 2; return }
   if (_.page <= 1) _.page = 0 
   return `Can't go back further. Sorry.`
 }
