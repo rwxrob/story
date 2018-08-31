@@ -43,8 +43,8 @@ const storygame = [
   `A story game called <a target="_blank" rel="noopener"
     href="http://www.historyofinformation.com/expanded.php?id=2384">Adventure</a>
     was the first computer game ever created.`,
-  `That's right, it wasn't <a href="https://en.wikipedia.org/wiki/Pong"
-    target=_blank>pong</a>, despite what most people think. `,
+  `Despite what most people think it wasn't <a href="https://en.wikipedia.org/wiki/Pong"
+    target=_blank>pong</a>.`,
   `This genre of game became known as <i>text adventures</i>.
     It was made popular by games such as
     <a href="https://en.wikipedia.org/wiki/Zork" target=_blank>Zork</a>,
@@ -67,7 +67,7 @@ const storygame = [
     or chatting or texting things naturally, as you would
     with another human.`,
   `As we see with Alexa, <a href='https://youtu.be/bd1mEm2Fy08'>Google
-    Assistant</a>, and Siri this form of interaction with technology
+    Assistant</a>, and Siri, this form of interaction with technology
     will only get better.`,
   `Well, that's all for now.`,
 ]
@@ -75,6 +75,8 @@ const storygame = [
 part.StoryGame = _ => print(storygame) ? 'StoryGame' : 'TheEnd'
 
 /*
+
+Need to reduce this and make into more manageable chunks.
 
 part.HowTo = _ => {
   return print(howto) ? 'StoryGame' : 'HowTo'

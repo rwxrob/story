@@ -24,7 +24,6 @@ function as a value.
 TODO
 ----
 
-* Add `say` just to say whatever is typed
 * Add up arrow and down arrow history
 * Add information flow history for `back`
 * Add _.voice.name support to change voices programmatically
