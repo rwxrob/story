@@ -274,16 +274,26 @@ repl.onkeydown = _ => {
   // only a single line of input allowed
 
   if (key !== "Enter" ) return
-  state.historyIndex = state.history.length
-
   _.preventDefault()
 
   state.raw = data.trim()
   state.line = state.raw.toLowerCase()
 
-  state.history.pop()
-  state.history.push(state.raw)
-  state.history.push(" ")
+  if (state.historyIndex >= 500) {
+    state.history.splice(0, 1)
+    state.history.pop()
+    state.history.push(state.raw)
+    state.history.push(" ")
+  } else {
+    state.historyIndex = state.history.length
+    state.history.pop()
+    state.history.push(state.raw)
+    state.history.push(" ")
+  }
+
+
+
+ 
 
   // TODO: add sudo support
 
