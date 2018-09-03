@@ -28,6 +28,8 @@ TODO
 * Add information flow history for `back`
 * Add _.voice.name support to change voices programmatically
 * Add lock that forces to wait for voice to finish before continuing
+* Add a modal display window that triggers blur event to
+  hide the onscreen keyboard (`show()`)
 
 [REPL.it]: https://repl.it/@robmuh/storygame
 [best first language]: https://medium.com/@robmuh/reconsider-learning-python-first-292ee5555c78

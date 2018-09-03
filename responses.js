@@ -12,7 +12,7 @@ response.Wow = _ => {
   }
 }
 
-response.Life = _ => _.line.includes('meaning of life?') ? "42" : ""
+response.Life = _ => _.line.includes('meaning of life') ? "42" : ""
 
 response.End = _ => _.previous === 'TheEnd' ? `Zzzzzz.` : ''
 

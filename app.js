@@ -149,6 +149,12 @@ response._Say = _ => {
   return `"${m[1]}"`
 }
 
+response._280Characters = _ => {
+  if (_.line === '207 char') {
+    return `0 1 2 3 4 5 6 7 8 9 `.repeat(10) + `0 1 2 3`
+  }
+}
+
 response._TalkToMe = _ => {
   if ( _.line.match(/start\s+talking|talk\s+to\s+me|tell\s+me\s+(about\s+it|more)|^talk$/) ) {
     _.voice.on = true
