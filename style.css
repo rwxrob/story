@@ -21,7 +21,6 @@ body {
   font-family: menlo, Consolas, monospace;
   font-size: x-large;
   overflow-y: hidden;
-  overflow-x: hidden;
   text-align: left;
   left: 50%;
   top: 50%;
