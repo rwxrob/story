@@ -253,14 +253,14 @@ repl.onkeydown = _ => {
   if (key === 'ArrowUp') {
     if (state.historyIndex > 0) {
       state.historyIndex -= 1
-      repl.innerHTML = `${state.historyHTML}<span class=prompt>> </span><span class=input contenteditable>${state.history[state.historyIndex]}</span>`
+      repl.innerHTML = `${state.historyHTML}<span class=prompt>&gt;&nbsp</span><span class=input contenteditable>${state.history[state.historyIndex]}</span>`
       focusLastInput()
     }
     _.preventDefault()
   } else if (key === 'ArrowDown') {
     if (state.historyIndex < state.history.length-1) {
       state.historyIndex += 1
-      repl.innerHTML = `${state.historyHTML}<span class=prompt>> </span><span class=input contenteditable>${state.history[state.historyIndex]}</span>`
+      repl.innerHTML = `${state.historyHTML}<span class=prompt>&gt;&nbsp</span><span class=input contenteditable>${state.history[state.historyIndex]}</span>`
       focusLastInput()
     }
     _.preventDefault()
